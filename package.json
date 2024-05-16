@@ -1,0 +1,29 @@
+{
+  "name": "11ty-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./dist/styles.css",
+    "build": "ELEVENTY_ENVIRONMENT=production npm run clean && npx @11ty/eleventy && npm run build:css",
+    "serve": "npx serve dist",
+    "dev:css": "npm run build:css -- --watch",
+    "dev": "npm run clean && concurrently \"npx @11ty/eleventy --serve\" \"npm run dev:css\""
+  },
+  "author": {
+    "name": "Bhargav Shukla",
+    "email": "hello@bhargavshukla.com",
+    "url": "https://thesilverhand.blog"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@tailwindcss/typography": "^0.5.13",
+    "concurrently": "^8.2.2",
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "luxon": "^3.4.4"
+  }
+}

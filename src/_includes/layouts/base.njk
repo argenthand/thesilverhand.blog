@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" class="font-sans min-h-full h-full">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% if title %}
+        {{ title }} - Bhargav Shukla
+      {% else %}
+        Bhargav Shukla - Fullstack Engineer
+      {% endif %}
+    </title>
+    <meta name="description" content="{{ summary }}">
+    <meta name=”robots” content="index, follow">
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ summary }}" />
+    <link
+      href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="manifest" href="/assets/site.webmanifest">
+  </head>
+  <body class="max-w-[90%] md:max-w-[79ch] mx-auto grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-full h-full
+  leading-relaxed tracking-wide bg-gradient-to-b from-slate-100 to-slate-200">
+    <header class="flex flex-col md:flex-row md:justify-between justify-center items-center md:items-baseline gap-6 py-16">
+      <a href="/" class="font-light uppercase text-xl no-underline text-slate-700">
+        bhargav<span class="font-bold">shukla</span>
+      </a>
+      <nav class="flex flex-row gap-6">
+        <a href="/about">About</a>
+        <a href="/articles">Archive</a>
+      </nav>
+    </header>
+    {{ content | safe }}
+    <footer class="flex justify-center items-center h-36">
+      <p>&copy; Bhargav Shukla {% fullYear %}.</p>
+    </footer>
+  </body>
+</html>

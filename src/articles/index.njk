@@ -1,0 +1,19 @@
+---
+layout: "layouts/base.njk"
+title: "My Blog Posts - Bhargav Shukla"
+eleventyExcludeFromCollections: true
+---
+
+{% from 'macros/articles-list.njk' import articles %}
+
+<main class="text-pretty">
+	<h1>All Articles</h1>
+	<section class="flex flex-col gap-6 mb-16 mt-8">
+		<p>
+			Here you can see all the articles I've published so far.
+		</p>
+	</section>
+	<section>
+		{{ articles(collections.articles) }}
+	</section>
+</main>

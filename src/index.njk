@@ -1,0 +1,26 @@
+---
+layout: "layouts/base.njk"
+eleventyImport:
+  collections: ["articles"]
+---
+
+{% from 'macros/articles-list.njk' import articles %}
+
+<main class="text-pretty">
+  <h1>Hi, I'm Bhargav! <span class="inline-block transition animate-bounce delay-500 duration-300">👋🏼</span></h1>
+  <section class="flex flex-col gap-6 mb-16 mt-8">
+    <p>
+      Welcome to my corner on the internet. This blog is where I write about my experiences with interesting
+      programming and technology things.
+    </p>
+  </section>
+  {% set latestArticlesCount %}
+    {{ collections.latestArticles | length }}
+  {% endset %}
+  {% if latestArticlesCount > 0 %}
+    <section>
+      <h2 class="mb-8">Latest Articles</h2>
+      {{ articles(collections.latestArticles) }}
+    </section>
+  {% endif %}
+</main>

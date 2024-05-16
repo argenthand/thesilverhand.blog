@@ -1,0 +1,23 @@
+{% macro articles(list) %}
+  <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row items-stretch gap-4">
+    {%- for post in list -%}
+      <article class="mt-2 mb-4 [&_a_h3]:hover:underline flex flex-col justify-between gap-4">
+        <a href="{{ post.url }}" class="no-underline">
+          <h3 class="mb-4">{{ post.data.title }}</h3>
+          <p class="font-light tracking-wider">{{ post.data.summary }}</p>
+        </a>
+        <div class="flex justify-between items-center">
+          <small class="uppercase">{{ post.data.date | readableDate }}</small>
+          {% set isArticleDateInFuture %}
+            {{ post.data.date | isDateInFuture | log }}
+          {% endset %}
+          {% if not post.data.published %}
+            <small class="bg-amber-100 text-amber-600 py-2 px-3 rounded-full uppercase">&#9888; draft</small>
+          {% elif isArticleDateInFuture %}
+            <small class="bg-blue-200 text-blue-600 py-2 px-3 rounded-full uppercase">&#x2714; ready</small>
+          {% endif %}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+{% endmacro %}
