@@ -20,7 +20,7 @@ module.exports = function (config) {
     const date = DateTime.fromJSDate(value, {zone: "UTC"});
     const now = DateTime.utc();
     return date > now;
-  })
+  });
 
   // shortcodes
   config.addShortcode("fullYear", function () {

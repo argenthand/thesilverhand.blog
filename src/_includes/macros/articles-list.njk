@@ -8,12 +8,10 @@
         </a>
         <div class="flex justify-between items-center">
           <small class="uppercase">{{ post.data.date | readableDate }}</small>
-          {% set isArticleDateInFuture %}
-            {{ post.data.date | isDateInFuture | log }}
-          {% endset %}
           {% if not post.data.published %}
             <small class="bg-amber-100 text-amber-600 py-2 px-3 rounded-full uppercase">&#9888; draft</small>
-          {% elif isArticleDateInFuture %}
+          {% endif %}
+          {% if post.data.date | isDateInFuture and post.data.published %}
             <small class="bg-blue-200 text-blue-600 py-2 px-3 rounded-full uppercase">&#x2714; ready</small>
           {% endif %}
         </div>
