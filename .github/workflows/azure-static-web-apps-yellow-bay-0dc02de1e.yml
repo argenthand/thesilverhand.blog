@@ -3,11 +3,11 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - production
+      - main
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - production
+      - main
   schedule:
     - cron: "30 1 * * 1"
 
