@@ -2,6 +2,8 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const {DateTime} = require('luxon');
 
 module.exports = function (config) {
+  config.amendLibrary("md", (mdLib) => mdLib.enable("code"));
+
   // plugins
   config.addPlugin(syntaxHighlight);
 
@@ -31,7 +33,7 @@ module.exports = function (config) {
   config.addCollection("articles", function (collectionApi) {
     return collectionApi.getFilteredByTag("articles")
       .filter(function (article) {
-        if (process.env.BUILD_DRAFTS) return true;
+        if (process.env.BUILD_DRAFTS === "true") return true;
         const now = DateTime.utc();
         const articleDate = DateTime.fromJSDate(article.data.date, {zone: "UTC"});
         return "published" in article.data && article.data?.published && now >= articleDate;
@@ -43,7 +45,7 @@ module.exports = function (config) {
   config.addCollection("latestArticles", function (collectionApi) {
     return collectionApi.getFilteredByTag("articles")
       .filter(function (article) {
-        if (process.env.BUILD_DRAFTS) return true;
+        if (process.env.BUILD_DRAFTS === "true") return true;
         const now = DateTime.utc();
         const articleDate = DateTime.fromJSDate(article.data.date, {zone: "UTC"});
         return "published" in article.data && article.data?.published && now >= articleDate;
@@ -53,18 +55,15 @@ module.exports = function (config) {
       }).slice(0, 9);
   });
 
-  // server config
-  config.on("eleventy.before", ({runMode}) => {
-    // Set the environment variable
-    if (runMode === "serve" || runMode === "watch") {
-      process.env.BUILD_DRAFTS = true;
-    }
-  });
+  if (process.env.ELEVENTY_RUN_MODE === "serve") {
+    process.env.BUILD_DRAFTS = "true";
+  }
 
   return {
     dir: {
       input: "src",
       output: "dist"
-    }
+    },
+    markdownTemplateEngine: "njk"
   }
 }
