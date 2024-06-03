@@ -1,6 +1,6 @@
 ---
 title: "My new favourite keyboard"
-date: 2024-06-03
+date: 2024-06-24
 summary: "My journey into the world of ergonomic keyboards with the ZSA Moonlander."
 tags: ["split keyboards", "ergonomics", "moonlander"]
 published: true

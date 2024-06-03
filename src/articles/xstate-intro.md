@@ -1,6 +1,6 @@
 ---
 title: Intro to XState
-date: 2024-05-13
+date: 2024-06-03
 summary: "Learning the basics of XState by designing a stateful toggle switch."
 tags: [ "react", "xstate" ]
 published: true

@@ -1,7 +1,7 @@
 ---
 title: "Using draft posts to control content on this blog"
 summary: "How I implemented draft content and automated publishing in 11ty."
-date: 2024-05-27
+date: 2024-06-17
 published: true
 tags: ["11ty", "meta"]
 ---

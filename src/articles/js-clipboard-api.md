@@ -1,7 +1,7 @@
 ---
 title: "Custom clipboard behaviour in React"
 published: true
-date: 2024-05-20
+date: 2024-06-10
 summary: "Learning how to leverage the Clipboard API to override the default copy behaviour in a React app."
 tags: ["react", "js"]
 ---
