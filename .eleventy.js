@@ -1,5 +1,18 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const {DateTime} = require('luxon');
+const {UTCDate} = require("@date-fns/utc");
+const {isFuture, format} = require("date-fns");
+
+function processArticles(collectionApi) {
+  return collectionApi.getFilteredByTag("articles")
+    .filter(function (article) {
+      if (process.env.SHOW_ARTICLES === "all") return true;
+      const articleDateUtc = new UTCDate(article.data.date);
+      return "published" in article.data && article.data?.published && !isFuture(articleDateUtc);
+    })
+    .sort(function (a, b) {
+      return b.date - a.date;
+    });
+}
 
 module.exports = function (config) {
   config.amendLibrary("md", (mdLib) => mdLib.enable("code"));
@@ -12,16 +25,13 @@ module.exports = function (config) {
 
   // filters
   config.addFilter("readableDate", function (value) {
-    const date = DateTime.fromJSDate(value, {zone: "UTC"});
-    return date.toLocaleString(DateTime.DATE_MED);
+    return format(new UTCDate(value), "MMM d, y");
   });
   config.addFilter("filterTagList", function filterTagList(tags) {
     return (tags || []).filter(tag => ["article", "articles", "nav", "all"].indexOf(tag) === -1);
   });
-  config.addFilter("isDateInFuture", function (value) {
-    const date = DateTime.fromJSDate(value, {zone: "UTC"});
-    const now = DateTime.utc();
-    return date > now;
+  config.addFilter("inFuture", function (value) {
+    return isFuture(new UTCDate(value));
   });
 
   // shortcodes
@@ -31,32 +41,14 @@ module.exports = function (config) {
 
   // collections
   config.addCollection("articles", function (collectionApi) {
-    return collectionApi.getFilteredByTag("articles")
-      .filter(function (article) {
-        if (process.env.BUILD_DRAFTS === "true") return true;
-        const now = DateTime.utc();
-        const articleDate = DateTime.fromJSDate(article.data.date, {zone: "UTC"});
-        return "published" in article.data && article.data?.published && now >= articleDate;
-      })
-      .sort(function (a, b) {
-        return b.date - a.date;
-      });
+    return processArticles(collectionApi);
   });
   config.addCollection("latestArticles", function (collectionApi) {
-    return collectionApi.getFilteredByTag("articles")
-      .filter(function (article) {
-        if (process.env.BUILD_DRAFTS === "true") return true;
-        const now = DateTime.utc();
-        const articleDate = DateTime.fromJSDate(article.data.date, {zone: "UTC"});
-        return "published" in article.data && article.data?.published && now >= articleDate;
-      })
-      .sort(function (a, b) {
-        return b.date - a.date;
-      }).slice(0, 9);
+    return processArticles(collectionApi).slice(0, 9);
   });
 
   if (process.env.ELEVENTY_RUN_MODE === "serve") {
-    process.env.BUILD_DRAFTS = "true";
+    process.env.SHOW_ARTICLES = "all";
   }
 
   return {

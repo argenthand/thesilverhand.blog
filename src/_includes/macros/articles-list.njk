@@ -11,7 +11,7 @@
           {% if not post.data.published %}
             <small class="bg-amber-100 text-amber-600 py-2 px-3 rounded-full uppercase">&#9888; draft</small>
           {% endif %}
-          {% if post.data.date | isDateInFuture and post.data.published %}
+          {% if post.data.date | inFuture and post.data.published %}
             <small class="bg-blue-200 text-blue-600 py-2 px-3 rounded-full uppercase">&#x2714; ready</small>
           {% endif %}
         </div>
