@@ -18,18 +18,18 @@ layout: "layouts/base.njk"
   <article class="flex justify-start items-start gap-4 flex-col mb-12">{{ content | safe }}</article>
   <p class="mt-2 mb-6">
     If you have any questions or feedback about this article, you can reach out to me at
-    <code>hello(at)bhargavshukla(dot)com</code>.
+    <code>feedback (@) thesilverhand (.) blog</code>.
   </p>
   <div class="flex justify-between items-center">
     {% if previousPost %}
       <div>
-        <p class="uppercase tracking-widest text-slate-600">Next Article</p>
+        <p class="uppercase tracking-widest text-slate-600">&larr; Next Article</p>
         <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
       </div>
     {% endif %}
     {% if nextPost %}
       <div class="ml-auto">
-        <p class="uppercase tracking-widest text-slate-600">Previous Article</p>
+        <p class="uppercase tracking-widest text-slate-600">Previous Article &rarr;</p>
         <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
       </div>
     {% endif %}
