@@ -3,6 +3,7 @@ title: "My new favourite keyboard"
 date: 2024-06-03
 summary: "My journey into the world of ergonomic keyboards with the ZSA Moonlander."
 tags: ["split keyboards", "ergonomics", "moonlander"]
+published: true
 ---
 
 Last year, I dove into the world of ergonomic keyboards, after experiencing pain and discomfort from typing long 
