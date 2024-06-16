@@ -104,7 +104,7 @@ or `READY` depending on each article's `date` and `published` frontmatter proper
 And here's how that looks when I'm running the site in development mode (along with a sneak peek at upcoming
 articles):
 
-![Screenshot of a grid of article titles](/assets/11ty-draft-badge.png)
+![Screenshot of a grid of article titles](/assets/11ty-drafts.png)
 
 That's all I could do within 11ty. To get the automated deployments going, I needed to go to the deployment flow. My
 blog is deployed on Azure Static Web Apps using a GitHub Actions script that Azure generated for me. This script
